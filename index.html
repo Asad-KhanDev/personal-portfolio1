@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}@keyframes pulse-bloom{0%,100%{box-shadow:0 0 0 0 rgba(56,242,127,0.4);}50%{box-shadow:0 0 12px 3px rgba(56,242,127,0.7);}}
+
+/* GPU-Accelerated Scroll-Triggered Animation Styles */
+.scroll-reveal-text {
+  display: inline-block;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  opacity: 0;
+  transform: translate3d(-16px, 0, 0);
+  transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path, opacity, transform;
+}
+.scroll-reveal-text.revealed {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Lifecycle Cards Staggered Animation */
+.lifecycle-card-anim {
+  opacity: 0;
+  transform: translate3d(-40px, 0, 0);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.lifecycle-card-anim.revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Capability Matrix Grid Reveal */
+.skill-card-cascade {
+  opacity: 0;
+  transform: scale3d(0.95, 0.95, 1);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.skill-card-cascade.revealed {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+}
+
+/* Project Cards 3D Perspective Container */
+.tilt-card-wrapper {
+  perspective: 1000px;
+}
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Live Radar Sonar Ring Pulse */
+@keyframes radar-sonar-ping {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.85;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+.radar-ring {
+  animation: radar-sonar-ping 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+/* Map Grid Overlay Texture */
+.hud-grid-pattern {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(56, 242, 127, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 242, 127, 0.05) 1px, transparent 1px);
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-text,
+  .lifecycle-card-anim,
+  .skill-card-cascade {
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .tilt-card {
+    transform: none !important;
+    transition: none !important;
+  }
+  .radar-ring {
+    animation: none !important;
+  }
+}
+</style><script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary-fixed": "#00210b", "tertiary-container": "#ced5de", "on-primary-container": "#006a31", "tertiary-fixed-dim": "#c0c7d0", "surface-container": "#1c2024", "on-background": "#dfe3e9", "surface": "#101418", "on-surface-variant": "#bacbb9", "on-error": "#690005", "inverse-on-surface": "#2d3135", "error": "#ffb4ab", "on-primary-fixed-variant": "#005224", "tertiary-fixed": "#dce3ed", "on-primary": "#003917", "surface-dim": "#101418", "on-tertiary-container": "#555c64", "primary-fixed": "#64ff93", "surface-container-highest": "#31353a", "error-container": "#93000a", "inverse-primary": "#006d32", "on-tertiary": "#2a3138", "on-secondary": "#2c3136", "outline-variant": "#3c4a3d", "secondary-fixed": "#dee3ea", "on-tertiary-fixed-variant": "#40474f", "on-surface": "#dfe3e9", "on-tertiary-fixed": "#151c23", "surface-tint": "#1ce473", "inverse-surface": "#dfe3e9", "outline": "#859584", "surface-container-lowest": "#0a0f13", "primary-fixed-dim": "#1ce473", "on-secondary-fixed": "#171c21", "background": "#101418", "secondary": "#c2c7ce", "surface-variant": "#31353a", "on-error-container": "#ffdad6", "surface-container-low": "#181c20", "surface-bright": "#353a3e", "tertiary": "#ebf1fb", "on-secondary-container": "#b1b5bc", "primary-container": "#38f27f", "surface-container-high": "#262a2f", "secondary-container": "#42474d", "secondary-fixed-dim": "#c2c7ce", "on-secondary-fixed-variant": "#42474d", "primary": "#c3ffca" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "grid-margin-mobile": "1.25rem", "grid-margin-desktop": "4rem", "module-padding-md": "1.5rem", "section-gap-desktop": "10rem", "section-gap-mobile": "5rem", "gutter": "1.5rem", "grid-margin-tablet": "2rem", "module-padding-lg": "2.5rem", "module-padding-sm": "1rem" }, "fontFamily": { "headline-lg-mobile": [ "Space Grotesk" ], "body-sm": [ "Geist" ], "display-mobile": [ "Space Grotesk" ], "display": [ "Space Grotesk" ], "headline-md": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "label-code": [ "JetBrains Mono" ], "label-micro": [ "JetBrains Mono" ], "title": [ "Geist" ], "body-md": [ "Geist" ], "body-lg": [ "Geist" ], "headline-md-mobile": [ "Space Grotesk" ] }, "fontSize": { "headline-lg-mobile": [ "2.25rem", { "lineHeight": "1.15", "letterSpacing": "-0.025em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" } ], "display-mobile": [ "2.75rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "display": [ "5rem", { "lineHeight": "1.02", "letterSpacing": "-0.04em", "fontWeight": "700" } ], "headline-md": [ "2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "500" } ], "headline-lg": [ "3.5rem", { "lineHeight": "1.08", "letterSpacing": "-0.035em", "fontWeight": "600" } ], "headline-sm": [ "1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "500" } ], "label-code": [ "0.75rem", { "lineHeight": "1.4", "letterSpacing": "0.06em", "fontWeight": "500" } ], "label-micro": [ "0.6875rem", { "lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "400" } ], "title": [ "1.25rem", { "lineHeight": "1.4", "letterSpacing": "-0.015em", "fontWeight": "500" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.55", "letterSpacing": "-0.005em", "fontWeight": "400" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.6", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "headline-md-mobile": [ "1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "500" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-fixed min-h-screen relative overflow-x-hidden" id="top"><!-- GLOWING SCROLL-PROGRESS INDICATOR (2px neon mint #38F27F, scalesX 0 to 1 with drop-shadow glow) --><div class="fixed top-0 left-0 w-full h-[2px] z-[100] pointer-events-none bg-transparent"><div class="h-full w-full bg-[#38f27f] origin-left transition-transform duration-75 ease-out shadow-[0_0_10px_#38f27f,0_0_20px_#38f27f] will-change-transform" id="scroll-progress-bar" style="transform: scaleX(0);"></div></div><div class="fixed top-0 left-0 w-full z-50 pointer-events-none px-grid-margin-mobile md:px-grid-margin-tablet lg:px-grid-margin-desktop pt-4 md:pt-6"><header class="max-w-[1440px] mx-auto flex items-center justify-between pointer-events-auto h-16"><div class="flex items-center gap-3 md:gap-5 bg-surface-container-low/80 backdrop-blur-xl px-4 py-2 rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><img alt="AAK Minimalist Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V6SS7qFTy7UHUI_kwkFunfA9BUqamccrqWPkvgRjzJaHwXiZszdlrNRkCVFbwCxbLRk1OlPX70o6UzVuwIFZp4SzFR0U95XP8SrBoa9Iwm9_Y_IyzrUYNv91RkHZrypLhf5cA4ryxz0W-KVUOsMBBO6QfRKPEXvTkD7ZBnVSKb8lifAxYrLul7m8RpB70iUEuF1oWx2yCwUSNAKF1L2z-_6AhO4Ein3nVR9HmKmtGGPMcymvMM8kAfGNa6"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface leading-none uppercase">Asad Ali Khan</span><div class="flex items-center gap-1.5 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_8px_#38f27f] animate-[pulse-bloom_2s_infinite]"></span><span class="font-label-micro text-label-micro uppercase tracking-widest text-on-surface-variant">Available 24/7</span></div></div></div><nav class="hidden lg:flex items-center gap-1 bg-surface-container-low/80 backdrop-blur-xl px-2 py-1.5 rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.5)]" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-full"><a aria-current="page" class="px-4 py-1.5 uppercase tracking-wider transition-colors bg-primary-container text-on-primary-container font-semibold rounded-full" data-path="work" href="#projects">Work</a><a class="px-4 py-1.5 font-label-code text-label-code uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#about">About</a><a class="px-4 py-1.5 font-label-code text-label-code uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="tech-and-process" href="#capability-matrix">Tech &amp; Process</a><a class="px-4 py-1.5 font-label-code text-label-code uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="experience" href="#experience">Experience</a><a class="px-4 py-1.5 font-label-code text-label-code uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#contact">Contact</a></nav><div class="flex items-center gap-2 md:gap-3 bg-surface-container-low/80 backdrop-blur-xl p-1.5 md:px-3 md:py-2 rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.5)]"><a class="flex items-center gap-2 bg-primary-container text-on-primary-container px-3.5 py-1.5 rounded-full font-label-code text-label-code uppercase font-semibold transition-all hover:bg-primary-fixed hover:shadow-[0_0_20px_rgba(56,242,127,0.4)] group" data-path="contact" href="#contact"><span class="">Start A Conversation</span><span class="material-symbols-outlined text-[16px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">arrow_outward</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header></div><main class="w-full pt-16 bg-surface-container-lowest min-h-screen relative z-10"><div class="flex flex-col w-full relative">
+<!-- LOADING OVERLAY & ENTRANCE SEQUENCE -->
+<div class="fixed inset-0 z-[999] bg-surface-container-lowest flex flex-col justify-between p-grid-margin-mobile md:p-grid-margin-desktop transition-opacity duration-700 pointer-events-auto" id="loader" style="opacity: 0; display: none;">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#38f27f]"></span>
+<span class="font-label-code text-label-code text-primary-container tracking-widest uppercase">SYSTEM INITIALIZATION</span>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant">SYS_CORE v4.9.2</span>
+</div>
+<div class="max-w-4xl mx-auto w-full text-center flex flex-col items-center gap-6">
+<div class="overflow-hidden">
+<p class="font-label-code text-label-code uppercase tracking-[0.3em] text-on-surface-variant">ASAD ALI KHAN — PORTFOLIO 2026</p>
+</div>
+<div class="text-display font-display text-on-surface tracking-tighter" id="loader-num">100%</div>
+<div class="w-full max-w-md h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container transition-all duration-75 w-0 shadow-[0_0_12px_#38f27f]" id="loader-bar" style="width: 100%;"></div>
+</div>
+<p class="font-label-micro text-label-micro text-outline tracking-widest uppercase">CALIBRATING KINETIC SHADERS • MOUNTING ENGINE MODULES</p>
+</div>
+<div class="flex justify-between items-center text-outline font-label-micro text-label-micro uppercase">
+<span class="">LAT: 33.6844° N • LON: 73.0479° E</span>
+<span class="">STATUS: SYNCHRONIZING</span>
+</div>
+</div>
+<!-- AMBIENT FLOATING HUD / LIVE TELEMETRY OVERLAY -->
+<div class="fixed bottom-6 left-grid-margin-mobile md:left-grid-margin-desktop z-40 hidden md:flex items-center gap-4 bg-surface-container-low/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-lg pointer-events-none">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-code text-label-code text-on-surface-variant uppercase">FPS: <span class="text-primary-container" id="telemetry-fps">60</span></span>
+</div>
+<span class="w-1 h-3 bg-surface-container-highest rounded-full"></span>
+<span class="font-label-code text-label-code text-on-surface-variant">PTR: <span class="text-on-surface" id="telemetry-coords">X: 961 | Y: 9454</span></span>
+</div>
+<!-- SECTION 1: CINEMATIC HERO -->
+<section class="relative min-h-[92vh] flex flex-col justify-between px-grid-margin-mobile md:px-grid-margin-desktop py-8 md:py-12 overflow-hidden" id="hero-section">
+<!-- WebGL Background Shader Canvas Asset -->
+<div class="relative z-10 flex flex-col items-start gap-4">
+<div class="inline-flex items-center gap-2.5 px-3 py-1.5 bg-surface-container-low/90 backdrop-blur-md rounded-full shadow-md">
+<span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#38f27f] animate-[pulse-bloom_2s_infinite]"></span>
+<span class="font-label-code text-label-code text-on-surface uppercase tracking-widest">SOFTWARE DEVELOPER • ANDROID • AI • WEB • 3D</span>
+</div>
+</div>
+<!-- Massive Split Kinetic Typography -->
+<div class="relative z-10 my-auto py-12 max-w-6xl">
+<div class="overflow-hidden">
+<h1 class="font-display text-display text-on-surface tracking-tighter leading-none select-none uppercase">
+          I ENGINEER <span class="text-primary-container transition-all duration-300 hover:text-primary-fixed">IDEAS</span>
+</h1>
+</div>
+<div class="overflow-hidden">
+<h1 class="font-display text-display text-on-surface tracking-tighter leading-none select-none uppercase flex flex-wrap items-center gap-x-6">
+<span class="">INTO DIGITAL</span>
+<span class="inline-block font-label-code text-label-code px-3 py-1 rounded-full bg-surface-container-high text-primary-container align-middle tracking-normal">
+            &lt;REAL-TIME / SCALABLE&gt;
+          </span>
+</h1>
+</div>
+<div class="overflow-hidden">
+<h1 class="font-display text-display text-on-surface tracking-tighter leading-none select-none uppercase">
+          <span class="text-primary-container transition-all duration-300 hover:text-primary-fixed">EXPERIENCES</span>
+</h1>
+</div>
+<p class="mt-8 max-w-xl font-body-lg text-body-lg text-secondary">
+        Computer Science student and developer building mobile applications, AI-powered systems, interactive web experiences, and immersive digital products.
+      </p>
+</div>
+<!-- Hero Bottom Bar -->
+<div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pt-8">
+<div class="flex items-center gap-4">
+<a class="px-5 py-2.5 bg-primary-container text-on-primary-fixed font-label-code text-label-code uppercase font-semibold rounded-full shadow-[0_0_20px_rgba(56,242,127,0.3)] hover:bg-primary-fixed transition-all" href="#projects">
+          EXPLORE CATALOG ↓
+        </a>
+<a class="px-5 py-2.5 bg-surface-container-low text-on-surface font-label-code text-label-code uppercase rounded-full hover:bg-surface-container-high transition-all" href="#terminal-section">
+          &gt;_ LAUNCH CLI
+        </a>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant font-label-micro text-label-micro uppercase tracking-widest">
+<span class="">SCROLL TO EXPLORE THE STORY</span>
+<div class="w-8 h-px bg-primary-container"></div>
+<span class="material-symbols-outlined text-[16px] text-primary-container animate-bounce">arrow_downward</span>
+</div>
+</div>
+</section>
+<!-- SECTION 2: KINETIC INTRODUCTION STATEMENT -->
+<section class="relative py-24 md:py-36 px-grid-margin-mobile md:px-grid-margin-desktop bg-surface-container-low">
+<div class="max-w-6xl mx-auto flex flex-col gap-10">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-label-code text-primary-container">[ MANIFESTO 001 ]</span>
+<div class="h-px bg-surface-container-highest flex-1"></div>
+</div>
+<p class="font-headline-lg text-headline-lg text-on-surface leading-tight tracking-tight uppercase">
+        I DON'T JUST BUILD PRODUCTS. I ENGINEER <span class="bg-primary-container text-on-primary-fixed px-2 py-0.5 rounded">SOLUTIONS</span> THAT SCALE. FROM ANDROID APPS TO AI SYSTEMS, I DELIVER SOFTWARE THAT WORKS — RELIABLY, ELEGANTLY, AND WITH PURPOSE.
+      </p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+<!-- Card 1: Full-Stack Expertise -->
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-3 hover:bg-surface-container-high transition-colors duration-300 group">
+<span class="material-symbols-outlined text-primary-container text-[28px] group-hover:scale-110 transition-transform duration-300">stacked_bar_chart</span>
+<h3 class="font-title text-title text-on-surface uppercase">Full-Stack Mastery</h3>
+<p class="font-body-md text-body-md text-secondary">From Android (Java/XML) to backend (Node.js/Express) and everything in between — I build complete, integrated systems from the ground up.</p>
+</div>
+<!-- Card 2: AI & Innovation -->
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-3 hover:bg-surface-container-high transition-colors duration-300 group">
+<span class="material-symbols-outlined text-primary-container text-[28px] group-hover:scale-110 transition-transform duration-300">psychology</span>
+<h3 class="font-title text-title text-on-surface uppercase">AI &amp; Innovation</h3>
+<p class="font-body-md text-body-md text-secondary">Leveraging computer vision, gesture recognition, and intelligent systems to create next-generation interactive experiences that push boundaries.</p>
+</div>
+<!-- Card 3: Quality & Reliability -->
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-3 hover:bg-surface-container-high transition-colors duration-300 group">
+<span class="material-symbols-outlined text-primary-container text-[28px] group-hover:scale-110 transition-transform duration-300">verified</span>
+<h3 class="font-title text-title text-on-surface uppercase">Quality &amp; Reliability</h3>
+<p class="font-body-md text-body-md text-secondary">Clean architecture, thorough testing, and attention to detail ensure every project is polished, performant, and ready for production.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: ABOUT & IDENTITY (ASYMMETRIC) -->
+<section class="relative py-24 md:py-32 px-grid-margin-mobile md:px-grid-margin-desktop" id="about">
+<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Asymmetric Left: High-Tech Spec Portrait Frame -->
+<div class="lg:col-span-5 relative group">
+<div class="absolute -top-3 -left-3 font-label-micro text-label-micro text-primary-container">[ POS // 01 ]</div>
+<div class="absolute -bottom-3 -right-3 font-label-micro text-label-micro text-primary-container">[ SEC // OK ]</div>
+<div class="relative overflow-hidden rounded-xl bg-surface-container-high p-2 shadow-2xl">
+<img alt="Portrait of Asad Ali Khan" class="w-full h-[460px] object-cover rounded-lg grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Futuristic portrait of Asad Ali Khan in a minimal high-contrast dark studio illuminated by subtle neon green cybernetic edge lighting, wearing minimal modern tech attire, looking confidently into the camera, extreme editorial cinematic mood, hyper-detailed photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1pHXt0ydtsozOi8EjnS_fBEVckxxDvqwsFr2wsf-AZcL_arrrRHs9YIJTPLWo5bAJDtxM2Hk6DYAdAdexyR1ny_2GJjBAicc3Wpmijj5C93lMivOqf_a1lBM8cNdTqNshHVoGWh5aWefFP4UiiDJX1dnLitrV3v-Y-i_PC_3sUszuthFtGG02TskC17eooqZN7S9TT-syHKaiEGRagObDIiuwJrro6ttm0PhjNOipdkg3si-b39Cb3BC3eowqQTlQAmg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80"></div>
+<!-- Live Telemetry Tag Overlay inside Photo -->
+<div class="absolute bottom-6 left-6 right-6 bg-surface-container-low/90 backdrop-blur-md p-3.5 rounded-lg flex flex-col gap-2 shadow-lg">
+<div class="flex items-center justify-between">
+<span class="font-label-code text-label-code text-primary-container">ID: AAK-7809</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant">LOC: PAKISTAN</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-micro text-label-micro text-on-surface font-semibold uppercase">ACTIVE • BUILDING NEXT-GEN EXPERIENCES</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Right: Bio, Technical Philosophy, Metrics -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="font-label-code text-label-code text-primary-container uppercase tracking-wider">&lt;IDENTITY // BIO&gt;</span>
+<div class="w-12 h-px bg-surface-container-highest"></div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight leading-tight">
+          ASAD ALI KHAN
+        </h2>
+<h3 class="font-title text-title text-primary-container uppercase tracking-tight">
+          Computer Science Student &amp; Software Developer
+        </h3>
+<p class="font-body-lg text-body-lg text-secondary">
+          Computer Science student and developer focused on building practical digital products across mobile development, AI, backend systems, interactive web experiences, and 3D applications. I enjoy turning ideas into functional, polished software and continuously exploring new technologies to solve real-world problems.
+        </p>
+<div class="flex flex-wrap gap-3 pt-2">
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label-micro text-label-micro text-on-surface-variant border border-outline-variant/30">Android Development</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label-micro text-label-micro text-on-surface-variant border border-outline-variant/30">AI</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label-micro text-label-micro text-on-surface-variant border border-outline-variant/30">Backend Systems</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label-micro text-label-micro text-on-surface-variant border border-outline-variant/30">Web</span>
+<span class="px-3 py-1.5 bg-surface-container-high rounded-full font-label-micro text-label-micro text-on-surface-variant border border-outline-variant/30">3D &amp; Interactive Applications</span>
+</div>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="px-5 py-2.5 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-semibold uppercase rounded-full shadow-[0_0_16px_rgba(56,242,127,0.3)] hover:bg-primary-fixed transition-all flex items-center gap-2" href="#contact">
+<span class="">GET IN TOUCH</span>
+<span class="material-symbols-outlined text-[16px]">mail</span>
+</a>
+<button class="px-5 py-2.5 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded-full hover:bg-surface-container-highest transition-all flex items-center gap-2" onclick="downloadResumeMock()">
+<span class="">CURRICULUM VITAE</span>
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: INTERACTIVE TECHNOLOGY & SKILLS CLUSTER -->
+<section class="relative py-24 px-grid-margin-mobile md:px-grid-margin-desktop bg-surface-container-low" id="capability-matrix">
+<div class="max-w-6xl mx-auto flex flex-col gap-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="font-label-code text-label-code text-primary-container uppercase tracking-widest">[ CAPABILITY MATRIX ]</span>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mt-1">
+<span class="scroll-reveal-text">Engineered Stacks &amp; Frameworks</span>
+</h2>
+</div>
+<p class="font-label-micro text-label-micro text-on-surface-variant max-w-xs">
+          HOVER NODES TO INSPECT TELEMETRY DATA, LIBRARIES, AND PROFICIENCY RATINGS.
+        </p>
+</div>
+<!-- Interactive Node Grid with Tooltip Trigger Script and Staggered Reveal -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5" id="skills-grid">
+<!-- Node 1: Android Development -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="90%" data-name="Android Development" data-stack="Java, Android Studio, XML, SDK, Activities, Fragments, Intents, Permissions, Notifications" data-years="3+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">android</span>
+<span class="font-label-micro text-label-micro text-outline">01</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Android Dev</span>
+<span class="font-label-micro text-label-micro text-primary-container">Java &amp; SDK</span>
+</div>
+</div>
+<!-- Node 2: Mobile App Architecture -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="85%" data-name="Mobile App Architecture" data-stack="Retrofit, Room DB, SQLite, SharedPreferences, MVVM, Modular Structure" data-years="3+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">architecture</span>
+<span class="font-label-micro text-label-micro text-outline">02</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">App Architecture</span>
+<span class="font-label-micro text-label-micro text-primary-container">MVVM &amp; Modular</span>
+</div>
+</div>
+<!-- Node 3: Backend & Server Dev -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="82%" data-name="Backend &amp; Server Dev" data-stack="Node.js, Express.js, REST APIs, HTTP, JSON, Server Architecture" data-years="2+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">dns</span>
+<span class="font-label-micro text-label-micro text-outline">03</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Backend</span>
+<span class="font-label-micro text-label-micro text-primary-container">Node.js &amp; REST</span>
+</div>
+</div>
+<!-- Node 4: Programming Languages -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="85%" data-name="Programming Languages" data-stack="Java, C++, Python, JavaScript, HTML, CSS" data-years="3+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">code</span>
+<span class="font-label-micro text-label-micro text-outline">04</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Languages</span>
+<span class="font-label-micro text-label-micro text-primary-container">Java · C++ · Python</span>
+</div>
+</div>
+<!-- Node 5: AI & Computer Vision -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="75%" data-name="AI &amp; Computer Vision" data-stack="Python, CameraX, Gesture Recognition, Image Processing, AI Concepts" data-years="1+ Year">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">visibility</span>
+<span class="font-label-micro text-label-micro text-outline">05</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">AI &amp; Vision</span>
+<span class="font-label-micro text-label-micro text-primary-container">Computer Vision</span>
+</div>
+</div>
+<!-- Node 6: Frontend Web Dev -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="80%" data-name="Frontend Web Dev" data-stack="HTML5, CSS3, JavaScript, Responsive Design, Modern UI" data-years="2+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">web</span>
+<span class="font-label-micro text-label-micro text-outline">06</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Frontend Web</span>
+<span class="font-label-micro text-label-micro text-primary-container">HTML · CSS · JS</span>
+</div>
+</div>
+<!-- Node 7: Interactive & Animated Web -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="75%" data-name="Interactive &amp; Animated Web" data-stack="JavaScript, GSAP, ScrollTrigger, Parallax, Interactive UI" data-years="1+ Year">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">animation</span>
+<span class="font-label-micro text-label-micro text-outline">07</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Web Animation</span>
+<span class="font-label-micro text-label-micro text-primary-container">GSAP &amp; Scroll</span>
+</div>
+</div>
+<!-- Node 8: UI/UX & Digital Design -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="82%" data-name="UI/UX &amp; Digital Product Design" data-stack="Modern UI, Dark Interfaces, Design Systems, Visual Hierarchy, Interaction Design" data-years="2+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">design_services</span>
+<span class="font-label-micro text-label-micro text-outline">08</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">UI/UX Design</span>
+<span class="font-label-micro text-label-micro text-primary-container">Design Systems</span>
+</div>
+</div>
+<!-- Node 9: 3D & Immersive Dev -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="70%" data-name="3D &amp; Immersive Dev" data-stack="Unreal Engine, Godot, 3D Characters, Animation, Environments" data-years="1+ Year">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">view_in_ar</span>
+<span class="font-label-micro text-label-micro text-outline">09</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">3D &amp; Immersive</span>
+<span class="font-label-micro text-label-micro text-primary-container">Unreal · Godot</span>
+</div>
+</div>
+<!-- Node 10: Game Development -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="72%" data-name="Game Development" data-stack="Godot, 2D Games, Physics, Input Handling, UI Systems, Canvas" data-years="1+ Year">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">sports_esports</span>
+<span class="font-label-micro text-label-micro text-outline">10</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Game Dev</span>
+<span class="font-label-micro text-label-micro text-primary-container">Godot &amp; 2D</span>
+</div>
+</div>
+<!-- Node 11: Dev Tools & Version Control -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="85%" data-name="Dev Tools &amp; Version Control" data-stack="Git, GitHub, VS Code, Android Studio, Node.js, API Testing" data-years="3+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">merge_type</span>
+<span class="font-label-micro text-label-micro text-outline">11</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Dev Tools</span>
+<span class="font-label-micro text-label-micro text-primary-container">Git · GitHub</span>
+</div>
+</div>
+<!-- Node 12: Software Engineering -->
+<div class="skill-card skill-card-cascade group relative bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 hover:border-primary-container/60 p-4 rounded-lg cursor-pointer transition-all duration-300 shadow-sm flex flex-col justify-between h-32" data-level="82%" data-name="Software Engineering" data-stack="OOP, Data Structures, Algorithms, Clean Code, Debugging, System Design" data-years="3+ Years">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary-container text-[20px]">memory</span>
+<span class="font-label-micro text-label-micro text-outline">12</span>
+</div>
+<div>
+<span class="font-title text-title text-on-surface block font-semibold">Software Eng</span>
+<span class="font-label-micro text-label-micro text-primary-container">OOP · DSA</span>
+</div>
+</div>
+</div>
+<!-- Dynamic Skill Telemetry Display Card - App Dev + Backend -->
+<div class="bg-surface-container-high p-module-padding-md rounded-xl flex flex-col gap-4 shadow-inner" id="skill-telemetry-banner">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<span class="font-label-micro text-label-micro text-primary-container uppercase tracking-wider">SELECTED NODE TELEMETRY</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface uppercase" id="telemetry-node-title">App &amp; Backend Development</h4>
+<p class="font-body-sm text-body-sm text-secondary" id="telemetry-node-stack">Android SDK · Java · Node.js · Express.js · REST APIs · HTTP · JSON · Server Architecture</p>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="font-label-micro text-label-micro text-on-surface-variant">MASTERY</span>
+<span class="font-label-code text-label-code text-primary-container font-bold" id="telemetry-node-pct">90%</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-micro text-label-micro text-on-surface-variant">EXPERIENCE</span>
+<span class="font-label-code text-label-code text-on-surface font-bold" id="telemetry-node-exp">3+ Years</span>
+</div>
+</div>
+</div>
+<!-- App Development + Backend Details -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 border-t border-outline-variant/30">
+<div class="flex flex-col">
+<span class="font-label-micro text-label-micro text-on-surface-variant">MOBILE</span>
+<span class="font-label-code text-label-code text-on-surface text-xs">Android SDK · Java</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant/70 text-[10px]">XML · Activities · Fragments</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-micro text-label-micro text-on-surface-variant">BACKEND</span>
+<span class="font-label-code text-label-code text-on-surface text-xs">Node.js · Express.js</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant/70 text-[10px]">Server Architecture</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-micro text-label-micro text-on-surface-variant">APIs</span>
+<span class="font-label-code text-label-code text-on-surface text-xs">REST · HTTP · JSON</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant/70 text-[10px]">API Integration · Testing</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-micro text-label-micro text-on-surface-variant">DATABASES</span>
+<span class="font-label-code text-label-code text-on-surface text-xs">Room · SQLite</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant/70 text-[10px]">Retrofit · SharedPrefs</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: CINEMATIC PINNED PROJECT SHOWCASES -->
+<section class="relative py-24 px-grid-margin-mobile md:px-grid-margin-desktop flex flex-col gap-24" id="projects">
+<div class="max-w-6xl mx-auto w-full">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-label-code text-primary-container">[ 002 // CORE PRODUCTION PORTFOLIO ]</span>
+<div class="h-px bg-surface-container-highest flex-1"></div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight mt-2">
+<span class="scroll-reveal-text">Featured Engineering Works</span>
+</h2>
+</div>
+
+<!-- PROJECT 01: TRACKWAY -->
+<div class="tilt-card-wrapper max-w-6xl mx-auto w-full" id="trackway-card-wrapper">
+<div class="tilt-card bg-surface-container rounded-2xl overflow-hidden shadow-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+<!-- Interactive Simulated Route Map / Media Container -->
+<div class="lg:col-span-7 bg-surface-container-lowest relative p-6 flex flex-col justify-between min-h-[380px] overflow-hidden" id="trackway-map-container">
+<!-- Actual Real-World Map Background Asset -->
+<img alt="TrackWay Live Map Islamabad" class="absolute inset-0 w-full h-full object-cover object-center opacity-40 mix-blend-screen select-none pointer-events-none filter contrast-125 brightness-90 grayscale-[35%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXIgXMluazZOKeD4VGAfZ_3ykw7G0LpVbQPwv5ZLRfqxXiKlv-mlYYZ-x42PxWBkVCtW0rrsrvvN3gVo794vKD1y5sj5phZih0208lrCL4yEZXo444iZNN6gML5adE71Ag-2Br4cGlUTmTHvnvR9gnVPuFtUuk5Cnyl1Zq8zZEzPgdGIK5KV0SXlYfgWdKR-T_sZUEntrsogjG_LWp8TAoLL8m6OiVTdiz2NnkP7F_DX2LKq8UYAj94XFejHMqw4h2u-A"/>
+<!-- Dark Tech HUD Vignette & Grid Scanner Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/30 to-surface-container-lowest/70 pointer-events-none"></div>
+<div class="absolute inset-0 hud-grid-pattern opacity-60 pointer-events-none"></div>
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-surface-container-lowest/40 to-surface-container-lowest pointer-events-none"></div>
+<!-- Live SVG Navigation Path & Breadcrumb Trail -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10" id="trackway-svg" preserveaspectratio="none" viewbox="0 0 1000 600">
+<defs>
+<filter height="200%" id="glow-neon" width="200%" x="-50%" y="-50%">
+<fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+<femerge>
+<femergenode in="blur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+<lineargradient id="trail-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#38f27f" stop-opacity="0"></stop>
+<stop offset="70%" stop-color="#38f27f" stop-opacity="0.65"></stop>
+<stop offset="100%" stop-color="#38f27f" stop-opacity="1"></stop>
+</lineargradient>
+</defs>
+<!-- Full Underlying Planned Route -->
+<path d="M 980 160 L 780 280 L 648 360 L 590 395 L 485 435 L 340 500 L 250 540" fill="none" stroke="#38f27f" stroke-dasharray="4 6" stroke-opacity="0.25" stroke-width="2"></path>
+<path d="M 648 360 L 540 280 L 515 255" fill="none" stroke="#38f27f" stroke-dasharray="2 5" stroke-opacity="0.2" stroke-width="1.5"></path>
+<path filter="url(#glow-neon)" id="live-trail-path" stroke="#38f27f" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+<!-- Interactive Live GPS Vehicle Beacon -->
+<div class="absolute z-20 pointer-events-none transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 will-change-transform" id="gps-beacon" style="left: 648px; top: 360px;">
+<div class="absolute -inset-4 rounded-full border border-primary-container/80 radar-ring pointer-events-none"></div>
+<div class="absolute -inset-2 rounded-full bg-primary-container/20 animate-ping pointer-events-none"></div>
+<div class="w-3 h-3 rounded-full bg-primary-container shadow-[0_0_12px_#38f27f,0_0_24px_#38f27f] border-2 border-white relative flex items-center justify-center">
+<div class="w-1 h-1 rounded-full bg-black"></div>
+</div>
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[3px] border-x-transparent border-b-[5px] border-b-primary-container" id="beacon-heading"></div>
+</div>
+<!-- Map Top Bar -->
+<div class="relative z-30 flex items-center justify-between gap-2">
+<span class="font-label-code text-label-code bg-surface-container/90 backdrop-blur-md px-3 py-1 rounded text-primary-container border border-outline-variant/40 shadow-sm">
+              [ 001 // FLEET_TELEMETRY ]
+            </span>
+<div class="flex items-center gap-2">
+<span class="font-label-micro text-label-micro text-primary-container bg-surface-container/90 backdrop-blur-md px-2.5 py-1 rounded flex items-center gap-1.5 border border-outline-variant/40 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+    LIVE GPS STREAM
+  </span>
+<button aria-label="Toggle Sonar Audio Ping" class="bg-surface-container/90 backdrop-blur-md hover:bg-surface-container-high text-on-surface-variant hover:text-primary-container p-1 rounded border border-outline-variant/40 transition-all flex items-center justify-center cursor-pointer group shadow-sm" id="sonar-audio-toggle" title="Toggle Sonar Ping Audio">
+<span class="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform" id="sonar-audio-icon">volume_off</span>
+</button>
+</div>
+</div>
+<!-- Telemetry HUD -->
+<div class="relative z-30 grid grid-cols-3 gap-2 bg-surface-container-low/90 backdrop-blur-md p-3 rounded-xl mt-auto border border-outline-variant/30">
+<div>
+<span class="font-label-micro text-label-micro text-on-surface-variant block">SPEED</span>
+<span class="font-label-code text-label-code text-on-surface font-bold transition-colors" id="telemetry-speed-val">64.2 km/h</span>
+</div>
+<div>
+<span class="font-label-micro text-label-micro text-on-surface-variant block">SATELLITES</span>
+<span class="font-label-code text-label-code text-primary-container font-bold">9 LOCK</span>
+</div>
+<div>
+<span class="font-label-micro text-label-micro text-on-surface-variant block">LATENCY</span>
+<span class="font-label-code text-label-code text-on-surface font-bold">22 ms</span>
+</div>
+</div>
+</div>
+<!-- Project Details -->
+<div class="lg:col-span-5 p-module-padding-md md:p-module-padding-lg flex flex-col justify-between gap-6 bg-surface-container">
+<div class="flex flex-col gap-3">
+<span class="font-label-micro text-label-micro text-outline uppercase tracking-widest">JAVA · ANDROID · NODE.JS · REST API</span>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">TRACKWAY</h3>
+<p class="font-body-md text-body-md text-secondary">
+              A real-time vehicle and delivery tracking platform built for managing drivers, journeys, deliveries, and location data through a connected Android application and backend system.
+            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Java</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Android</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">XML</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">GPS</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Node.js</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">REST API</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Retrofit</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Notifications</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-semibold uppercase rounded hover:bg-primary-fixed transition-all flex items-center gap-1.5" onclick="triggerProjectModal('Trackway Fleet Engine')">
+<span class="">EXPLORE METRICS</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+<a class="px-4 py-2 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded hover:bg-surface-container-highest transition-all" href="https://github.com/Asad-KhanDev/TrackWay" target="_blank">
+              GITHUB REPO
+            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PROJECT 02: NEXA AI -->
+<div class="tilt-card-wrapper max-w-6xl mx-auto w-full">
+<div class="tilt-card bg-surface-container rounded-2xl overflow-hidden shadow-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+<!-- Interactive Simulated Neural / Chat Window -->
+<div class="lg:col-span-7 bg-surface-container-lowest relative p-6 flex flex-col justify-between min-h-[380px] overflow-hidden">
+<div class="relative z-10 flex items-center justify-between">
+<span class="font-label-code text-label-code bg-surface-container/90 backdrop-blur-md px-3 py-1 rounded text-primary-container">
+              [ 002 // NEURAL_ASSISTANT ]
+            </span>
+<span class="font-label-micro text-label-micro text-on-surface-variant bg-surface-container/90 px-2.5 py-1 rounded">
+              CONTEXT TOKEN CACHE: 99.4%
+            </span>
+</div>
+<!-- Simulated Live Chat HUD -->
+<div class="relative z-10 flex flex-col gap-2.5 my-auto max-w-md">
+<div class="bg-surface-container-high/90 p-3 rounded-lg self-start">
+<span class="font-label-micro text-label-micro text-primary-container block mb-1">USER_PROMPT</span>
+<p class="font-body-sm text-body-sm text-on-surface">"Synthesize the optimal Android background service architecture for location streaming."</p>
+</div>
+<div class="bg-surface-container-low/95 p-3 rounded-lg self-end border-l-2 border-primary-container shadow-lg">
+<span class="font-label-micro text-label-micro text-primary-container block mb-1">NEXA_INFERENCE • 14ms</span>
+<p class="font-body-sm text-body-sm text-on-surface" id="typewriter-text">
+                "Deploy Foreground Service paired with FusedLocationProviderClient and a reactive Kotlin Flow pipeline..."
+              </p>
+</div>
+</div>
+<div class="relative z-10 flex items-center justify-between font-label-micro text-label-micro text-outline">
+<span class="">MODEL: GEMINI / CLAUDE DUAL INGESTION</span>
+<span class="">STATUS: 0 ERRORS</span>
+</div>
+</div>
+<!-- Project Details -->
+<div class="lg:col-span-5 p-module-padding-md md:p-module-padding-lg flex flex-col justify-between gap-6 bg-surface-container">
+<div class="flex flex-col gap-3">
+<span class="font-label-micro text-label-micro text-outline uppercase tracking-widest">JAVA · ANDROID · NODE.JS · REST API · AI</span>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">NEXA AI</h3>
+<p class="font-body-md text-body-md text-secondary">
+              An AI-powered Android chatbot designed to provide an intelligent conversational experience through a connected backend, API communication, and persistent local conversation storage.
+            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Java</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Android</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Node.js</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">REST API</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Retrofit</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Room Database</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">JSON</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">AI</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-semibold uppercase rounded hover:bg-primary-fixed transition-all flex items-center gap-1.5" onclick="triggerProjectModal('Nexa Autonomous Intelligence')">
+<span class="">EXPLORE METRICS</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+<a class="px-4 py-2 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded hover:bg-surface-container-highest transition-all" href="https://github.com/Asad-KhanDev/NEXA-AI" target="_blank">
+              GITHUB REPO
+            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PROJECT 03: NEXA AIR -->
+<div class="tilt-card-wrapper max-w-6xl mx-auto w-full">
+<div class="tilt-card bg-surface-container rounded-2xl overflow-hidden shadow-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+<!-- Interactive Simulated Computer Vision Canvas -->
+<div class="lg:col-span-7 bg-surface-container-lowest relative p-6 flex flex-col justify-between min-h-[380px] overflow-hidden">
+<div class="relative z-10 flex items-center justify-between">
+<span class="font-label-code text-label-code bg-surface-container/90 backdrop-blur-md px-3 py-1 rounded text-primary-container">
+              [ 003 // TOUCHLESS_VISION_HUB ]
+            </span>
+<span class="font-label-micro text-label-micro text-primary-container bg-surface-container/90 px-2.5 py-1 rounded">
+              TRACKING: 21 HAND LANDMARKS
+            </span>
+</div>
+<!-- Simulated Hand Tracking Skeleton Graphic -->
+<div class="relative z-10 flex items-center justify-center my-4">
+<svg class="w-48 h-48 text-primary-container opacity-85" fill="none" viewbox="0 0 100 100">
+<circle class="animate-pulse" cx="50" cy="70" fill="currentColor" r="3"></circle>
+<circle cx="35" cy="55" fill="currentColor" r="2.5"></circle>
+<circle cx="45" cy="45" fill="currentColor" r="2.5"></circle>
+<circle cx="55" cy="42" fill="currentColor" r="2.5"></circle>
+<circle cx="65" cy="45" fill="currentColor" r="2.5"></circle>
+<circle cx="75" cy="55" fill="currentColor" r="2.5"></circle>
+<circle cx="20" cy="40" fill="#ffffff" r="3.5"></circle>
+<circle cx="38" cy="20" fill="#ffffff" r="3.5"></circle>
+<circle cx="55" cy="15" fill="#ffffff" r="3.5"></circle>
+<circle cx="70" cy="20" fill="#ffffff" r="3.5"></circle>
+<circle cx="85" cy="40" fill="#ffffff" r="3.5"></circle>
+<path d="M50 70 L35 55 L20 40 M50 70 L45 45 L38 20 M50 70 L55 42 L55 15 M50 70 L65 45 L70 20 M50 70 L75 55 L85 40" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1.5"></path>
+</svg>
+</div>
+<div class="relative z-10 flex items-center justify-between font-label-micro text-label-micro text-outline">
+<span class="">GESTURE: [ PINCH_TO_SELECT // CONFIDENCE: 98.7% ]</span>
+<span class="">LATENCY: 8.2ms</span>
+</div>
+</div>
+<!-- Project Details -->
+<div class="lg:col-span-5 p-module-padding-md md:p-module-padding-lg flex flex-col justify-between gap-6 bg-surface-container">
+<div class="flex flex-col gap-3">
+<span class="font-label-micro text-label-micro text-outline uppercase tracking-widest">JAVA · ANDROID · CAMERAX · AI · COMPUTER VISION</span>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">NEXA AIR</h3>
+<p class="font-body-md text-body-md text-secondary">
+              An AI gesture-control system that transforms a smartphone camera into an interactive controller for a Windows computer using computer vision and gesture recognition.
+            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Java</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Android</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">CameraX</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">AI</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Computer Vision</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Gesture Recognition</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Networking</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-semibold uppercase rounded hover:bg-primary-fixed transition-all flex items-center gap-1.5" onclick="triggerProjectModal('Nexa Air Gesture Engine')">
+<span class="">EXPLORE METRICS</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+<a class="px-4 py-2 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded hover:bg-surface-container-highest transition-all" href="https://github.com/Asad-KhanDev/NEXA-AIR" target="_blank">
+              GITHUB REPO
+            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PROJECT 04: BUILD FIT -->
+<div class="tilt-card-wrapper max-w-6xl mx-auto w-full">
+<div class="tilt-card bg-surface-container rounded-2xl overflow-hidden shadow-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+<!-- Interactive Simulated Fitness App Interface -->
+<div class="lg:col-span-7 bg-surface-container-lowest relative p-6 flex flex-col justify-between min-h-[380px] overflow-hidden">
+<div class="relative z-10 flex items-center justify-between">
+<span class="font-label-code text-label-code bg-surface-container/90 backdrop-blur-md px-3 py-1 rounded text-primary-container">
+              [ 004 // FITNESS_ENGINE ]
+            </span>
+<span class="font-label-micro text-label-micro text-on-surface-variant bg-surface-container/90 px-2.5 py-1 rounded">
+              WORKOUT SESSION: ACTIVE
+            </span>
+</div>
+<!-- Fitness App Mockup -->
+<div class="relative z-10 flex flex-col items-center justify-center my-auto">
+<div class="w-full max-w-xs bg-surface-container-low/80 backdrop-blur-sm rounded-xl p-4 border border-outline-variant/30">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-code text-label-code text-primary-container">BUILD FIT</span>
+<span class="material-symbols-outlined text-primary-container text-[20px]">fitness_center</span>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-high/50 p-3 rounded-lg">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-[28px]">directions_run</span>
+</div>
+<div>
+<span class="font-label-micro text-label-micro text-on-surface-variant block">CURRENT WORKOUT</span>
+<span class="font-title text-title text-on-surface text-sm">Upper Body Strength</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-3">
+<div class="bg-surface-container-high/50 p-2 rounded-lg text-center">
+<span class="font-label-code text-label-code text-primary-container">8</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant block text-[10px]">Exercises</span>
+</div>
+<div class="bg-surface-container-high/50 p-2 rounded-lg text-center">
+<span class="font-label-code text-label-code text-primary-container">45</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant block text-[10px]">Minutes</span>
+</div>
+<div class="bg-surface-container-high/50 p-2 rounded-lg text-center">
+<span class="font-label-code text-label-code text-primary-container">320</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant block text-[10px]">Calories</span>
+</div>
+</div>
+</div>
+</div>
+<div class="relative z-10 flex items-center justify-between font-label-micro text-label-micro text-outline mt-4">
+<span class="">MODE: STRUCTURED WORKOUT</span>
+<span class="">SESSION: ACTIVE</span>
+</div>
+</div>
+<!-- Project Details -->
+<div class="lg:col-span-5 p-module-padding-md md:p-module-padding-lg flex flex-col justify-between gap-6 bg-surface-container">
+<div class="flex flex-col gap-3">
+<span class="font-label-micro text-label-micro text-outline uppercase tracking-widest">JAVA · ANDROID · XML · UI/UX · 3D ANIMATION</span>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">BUILD FIT</h3>
+<p class="font-body-md text-body-md text-secondary">
+              A professional fitness-focused Android application designed around structured workout experiences, exercise guidance, and an immersive digital fitness interface.
+            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Java</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Android</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">XML</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">UI/UX</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">3D Animation</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Exercise Systems</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-semibold uppercase rounded hover:bg-primary-fixed transition-all flex items-center gap-1.5" onclick="triggerProjectModal('Build Fit Fitness Engine')">
+<span class="">EXPLORE METRICS</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+<a class="px-4 py-2 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded hover:bg-surface-container-highest transition-all" href="https://github.com/Asad-KhanDev/BuildFit" target="_blank">
+              GITHUB REPO
+            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PROJECT 05: PING PONG -->
+<div class="tilt-card-wrapper max-w-6xl mx-auto w-full">
+<div class="tilt-card bg-surface-container rounded-2xl overflow-hidden shadow-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+<!-- Interactive Simulated Mini Game Canvas -->
+<div class="lg:col-span-7 bg-surface-container-lowest relative p-6 flex flex-col justify-between min-h-[380px] overflow-hidden">
+<div class="relative z-10 flex items-center justify-between">
+<span class="font-label-code text-label-code bg-surface-container/90 backdrop-blur-md px-3 py-1 rounded text-primary-container">
+              [ 005 // GAME_PHYSICS_ENGINE ]
+            </span>
+<span class="font-label-micro text-label-micro text-on-surface-variant bg-surface-container/90 px-2.5 py-1 rounded" id="game-score">
+              PLAYER 08 : 06 CPU
+            </span>
+</div>
+<!-- Micro Interactive Canvas -->
+<div class="relative z-10 w-full h-44 bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center">
+<canvas class="w-full h-full block cursor-crosshair" height="176" id="pong-canvas" width="480"></canvas>
+</div>
+<div class="relative z-10 flex items-center justify-between font-label-micro text-label-micro text-outline">
+<span class="">MOVE MOUSE OVER CANVAS TO DEFEND</span>
+<span class="">COLLISION ENGINE: ACCELERATED ELASTIC</span>
+</div>
+</div>
+<!-- Project Details -->
+<div class="lg:col-span-5 p-module-padding-md md:p-module-padding-lg flex flex-col justify-between gap-6 bg-surface-container">
+<div class="flex flex-col gap-3">
+<span class="font-label-micro text-label-micro text-outline uppercase tracking-widest">GODOT · GDSCRIPT · 2D GAME DEVELOPMENT</span>
+<h3 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">PING PONG</h3>
+<p class="font-body-md text-body-md text-secondary">
+              A lightweight arcade-style table tennis game focused on smooth gameplay, interactive mechanics, multiple game modes, customization, progression, and a polished visual experience.
+            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Godot</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">GDScript</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">2D Game Dev</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Game Physics</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Game UI</span>
+<span class="px-2.5 py-1 bg-surface-container-high rounded text-on-surface-variant font-label-micro text-label-micro">Animation</span>
+</div>
+<div class="flex items-center gap-4 pt-2">
+<button class="px-4 py-2 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-semibold uppercase rounded hover:bg-primary-fixed transition-all flex items-center gap-1.5" onclick="triggerProjectModal('Ping Pong Game Engine')">
+<span class="">EXPLORE METRICS</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</button>
+<a class="px-4 py-2 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded hover:bg-surface-container-highest transition-all" href="https://github.com/Asad-KhanDev/PingPong" target="_blank">
+              GITHUB REPO
+            </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 6: HORIZONTAL SCROLLING ARCHITECTURE BLUEPRINTS -->
+<section class="relative py-24 px-grid-margin-mobile md:px-grid-margin-desktop bg-surface-container-low overflow-hidden">
+<div class="max-w-6xl mx-auto flex flex-col gap-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="font-label-code text-label-code text-primary-container uppercase tracking-widest">[ SYSTEM BLUEPRINTS • UNDER THE HOOD ]</span>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mt-1">
+<span class="scroll-reveal-text">Architectural Schematics</span>
+</h2>
+</div>
+<p class="font-label-micro text-label-micro text-on-surface-variant">
+          DRAG OR SCROLL HORIZONTALLY TO INSPECT REEL →
+        </p>
+</div>
+<!-- Horizontal Reel Container -->
+<div class="flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory focus:outline-none" id="schematics-reel">
+<!-- Blueprint Card 1: Android Architecture -->
+<div class="shrink-0 w-80 md:w-96 bg-surface-container p-module-padding-md rounded-xl snap-start shadow-md flex flex-col justify-between h-80 hover:border hover:border-primary-container/30 transition-all duration-300">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-code text-label-code text-primary-container">SCHEMATIC 01</span>
+<span class="material-symbols-outlined text-outline">android</span>
+</div>
+<h4 class="font-title text-title text-on-surface uppercase font-semibold">Android App Architecture</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-2">MVVM-based architecture using Activities, Fragments, Intents, and Services. Retrofit for API calls, Room for local persistence with SQLite, and SharedPreferences for lightweight data storage.</p>
+</div>
+<div class="font-label-micro text-label-micro text-on-surface-variant flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<span class="">PATTERN: MVVM</span>
+<span class="text-primary-container font-mono">JAVA · XML</span>
+</div>
+</div>
+<!-- Blueprint Card 2: Backend & API Architecture -->
+<div class="shrink-0 w-80 md:w-96 bg-surface-container p-module-padding-md rounded-xl snap-start shadow-md flex flex-col justify-between h-80 hover:border hover:border-primary-container/30 transition-all duration-300">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-code text-label-code text-primary-container">SCHEMATIC 02</span>
+<span class="material-symbols-outlined text-outline">dns</span>
+</div>
+<h4 class="font-title text-title text-on-surface uppercase font-semibold">RESTful Backend &amp; API Gateway</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-2">Node.js and Express.js server architecture with RESTful API endpoints. HTTP/JSON communication, route handling, middleware implementation, and integration with Android clients via Retrofit.</p>
+</div>
+<div class="font-label-micro text-label-micro text-on-surface-variant flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<span class="">PROTOCOL: REST</span>
+<span class="text-primary-container font-mono">NODE.JS · EXPRESS</span>
+</div>
+</div>
+<!-- Blueprint Card 3: AI & Computer Vision Architecture -->
+<div class="shrink-0 w-80 md:w-96 bg-surface-container p-module-padding-md rounded-xl snap-start shadow-md flex flex-col justify-between h-80 hover:border hover:border-primary-container/30 transition-all duration-300">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-code text-label-code text-primary-container">SCHEMATIC 03</span>
+<span class="material-symbols-outlined text-outline">visibility</span>
+</div>
+<h4 class="font-title text-title text-on-surface uppercase font-semibold">AI &amp; Computer Vision Pipeline</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-2">CameraX integration for real-time frame capture, gesture recognition and hand landmark detection via computer vision models, and networking layer for mobile-to-PC gesture control communication.</p>
+</div>
+<div class="font-label-micro text-label-micro text-on-surface-variant flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<span class="">FRAMEWORK: CAMERAX</span>
+<span class="text-primary-container font-mono">AI · CV</span>
+</div>
+</div>
+<!-- Blueprint Card 4: Game & 3D Development Architecture -->
+<div class="shrink-0 w-80 md:w-96 bg-surface-container p-module-padding-md rounded-xl snap-start shadow-md flex flex-col justify-between h-80 hover:border hover:border-primary-container/30 transition-all duration-300">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-code text-label-code text-primary-container">SCHEMATIC 04</span>
+<span class="material-symbols-outlined text-outline">sports_esports</span>
+</div>
+<h4 class="font-title text-title text-on-surface uppercase font-semibold">Game &amp; 3D Interactive Engine</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-2">Godot engine for 2D game development with GDScript, physics systems, input handling, animation, and UI systems. Unreal Engine for 3D immersive experiences and interactive environments.</p>
+</div>
+<div class="font-label-micro text-label-micro text-on-surface-variant flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<span class="">ENGINES: GODOT · UNREAL</span>
+<span class="text-primary-container font-mono">GDScript · 3D</span>
+</div>
+</div>
+<!-- Blueprint Card 5: Web & Interactive Architecture -->
+<div class="shrink-0 w-80 md:w-96 bg-surface-container p-module-padding-md rounded-xl snap-start shadow-md flex flex-col justify-between h-80 hover:border hover:border-primary-container/30 transition-all duration-300">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-code text-label-code text-primary-container">SCHEMATIC 05</span>
+<span class="material-symbols-outlined text-outline">web</span>
+</div>
+<h4 class="font-title text-title text-on-surface uppercase font-semibold">Web &amp; Interactive UI Architecture</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-2">Responsive web interfaces with HTML5, CSS3, and JavaScript. GSAP and ScrollTrigger for scroll-driven animations, parallax effects, and interactive UI experiences across modern browsers.</p>
+</div>
+<div class="font-label-micro text-label-micro text-on-surface-variant flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<span class="">ANIMATION: GSAP</span>
+<span class="text-primary-container font-mono">HTML · CSS · JS</span>
+</div>
+</div>
+<!-- Blueprint Card 6: Full Stack Integration -->
+<div class="shrink-0 w-80 md:w-96 bg-surface-container p-module-padding-md rounded-xl snap-start shadow-md flex flex-col justify-between h-80 hover:border hover:border-primary-container/30 transition-all duration-300">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-code text-label-code text-primary-container">SCHEMATIC 06</span>
+<span class="material-symbols-outlined text-outline">sync_alt</span>
+</div>
+<h4 class="font-title text-title text-on-surface uppercase font-semibold">Full Stack Integration Layer</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-2">Seamless integration between Android clients, Node.js backend servers, and third-party services. API communication, database synchronization, and real-time data flow management.</p>
+</div>
+<div class="font-label-micro text-label-micro text-on-surface-variant flex justify-between items-center pt-4 border-t border-surface-container-highest">
+<span class="">STACK: FULL</span>
+<span class="text-primary-container font-mono">MOBILE · BACKEND · API</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 7: DEVELOPMENT PROCESS PIPELINE -->
+<section class="relative py-24 md:py-32 px-grid-margin-mobile md:px-grid-margin-desktop" id="lifecycle-section">
+<div class="max-w-6xl mx-auto flex flex-col gap-16">
+<div>
+<span class="font-label-code text-label-code text-primary-container uppercase tracking-widest">[ METHODOLOGY ]</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface uppercase tracking-tight mt-1">
+<span class="scroll-reveal-text">Precision Engineering Lifecycle</span>
+</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-6 gap-6 relative" id="lifecycle-grid">
+<!-- Step 1: IDEATE -->
+<div class="lifecycle-card-anim bg-surface-container p-5 rounded-xl flex flex-col justify-between h-56 shadow-md transition-colors duration-300 hover:bg-surface-container-high border border-outline-variant/20 hover:border-primary-container/40" style="transition-delay: 0ms;">
+<div class="flex justify-between items-start">
+<span class="font-label-code text-label-code text-primary-container">01</span>
+<span class="material-symbols-outlined text-[20px] text-outline">lightbulb</span>
+</div>
+<div>
+<h4 class="font-title text-title text-on-surface uppercase font-bold">IDEATE</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Concept development, requirement gathering, user research, and defining project scope and objectives.</p>
+</div>
+</div>
+<!-- Step 2: DESIGN -->
+<div class="lifecycle-card-anim bg-surface-container p-5 rounded-xl flex flex-col justify-between h-56 shadow-md transition-colors duration-300 hover:bg-surface-container-high border border-outline-variant/20 hover:border-primary-container/40" style="transition-delay: 120ms;">
+<div class="flex justify-between items-start">
+<span class="font-label-code text-label-code text-primary-container">02</span>
+<span class="material-symbols-outlined text-[20px] text-outline">design_services</span>
+</div>
+<div>
+<h4 class="font-title text-title text-on-surface uppercase font-bold">DESIGN</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-1">UI/UX wireframing, architecture planning, database schema design, and API endpoint structure mapping.</p>
+</div>
+</div>
+<!-- Step 3: DEVELOP -->
+<div class="lifecycle-card-anim bg-surface-container p-5 rounded-xl flex flex-col justify-between h-56 shadow-md transition-colors duration-300 hover:bg-surface-container-high border border-outline-variant/20 hover:border-primary-container/40" style="transition-delay: 240ms;">
+<div class="flex justify-between items-start">
+<span class="font-label-code text-label-code text-primary-container">03</span>
+<span class="material-symbols-outlined text-[20px] text-outline">terminal</span>
+</div>
+<div>
+<h4 class="font-title text-title text-on-surface uppercase font-bold">DEVELOP</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Android (Java/XML), backend (Node.js/Express), AI models, web interfaces, and game development implementation.</p>
+</div>
+</div>
+<!-- Step 4: INTEGRATE -->
+<div class="lifecycle-card-anim bg-surface-container p-5 rounded-xl flex flex-col justify-between h-56 shadow-md transition-colors duration-300 hover:bg-surface-container-high border border-outline-variant/20 hover:border-primary-container/40" style="transition-delay: 360ms;">
+<div class="flex justify-between items-start">
+<span class="font-label-code text-label-code text-primary-container">04</span>
+<span class="material-symbols-outlined text-[20px] text-outline">sync_alt</span>
+</div>
+<div>
+<h4 class="font-title text-title text-on-surface uppercase font-bold">INTEGRATE</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-1">REST API integration, Retrofit communication, database synchronization, and cross-platform connectivity.</p>
+</div>
+</div>
+<!-- Step 5: TEST -->
+<div class="lifecycle-card-anim bg-surface-container p-5 rounded-xl flex flex-col justify-between h-56 shadow-md transition-colors duration-300 hover:bg-surface-container-high border border-outline-variant/20 hover:border-primary-container/40" style="transition-delay: 480ms;">
+<div class="flex justify-between items-start">
+<span class="font-label-code text-label-code text-primary-container">05</span>
+<span class="material-symbols-outlined text-[20px] text-outline">bug_report</span>
+</div>
+<div>
+<h4 class="font-title text-title text-on-surface uppercase font-bold">TEST</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-1">Unit testing, UI testing, API testing, performance profiling, device compatibility, and edge case validation.</p>
+</div>
+</div>
+<!-- Step 6: DEPLOY -->
+<div class="lifecycle-card-anim bg-surface-container p-5 rounded-xl flex flex-col justify-between h-56 shadow-md transition-colors duration-300 hover:bg-surface-container-high border border-outline-variant/20 hover:border-primary-container/40" style="transition-delay: 600ms;">
+<div class="flex justify-between items-start">
+<span class="font-label-code text-label-code text-primary-container">06</span>
+<span class="material-symbols-outlined text-[20px] text-outline">rocket_launch</span>
+</div>
+<div>
+<h4 class="font-title text-title text-on-surface uppercase font-bold">DEPLOY</h4>
+<p class="font-body-sm text-body-sm text-secondary mt-1">GitHub version control, APK generation, server deployment, release management, and production monitoring.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 8: EXPERIENCE & TIMELINE -->
+<section class="relative py-24 px-grid-margin-mobile md:px-grid-margin-desktop bg-surface-container-low" id="experience">
+<div class="max-w-4xl mx-auto flex flex-col gap-12">
+<div class="flex items-center gap-2">
+<span class="font-label-code text-label-code text-primary-container">[ CHRONICLE // TRAJECTORY ]</span>
+<div class="h-px bg-surface-container-highest flex-1"></div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight">
+<span class="scroll-reveal-text">Evolutionary Milestones</span>
+</h2>
+<div class="flex flex-col gap-8">
+<!-- Milestone 1: 2026 -->
+<div class="bg-surface-container p-module-padding-md rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm hover:bg-surface-container-high transition-colors duration-300">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3">
+<span class="font-label-code text-label-code bg-primary-container text-on-primary-fixed px-2.5 py-0.5 rounded font-bold">2026</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase">Software Developer &amp; Creative Technology Builder</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">
+              Building and refining full-stack applications, AI-powered systems, interactive web experiences, and 3D/game projects. Working across Android, backend development, AI, computer vision, web technologies, and interactive digital experiences.
+            </p>
+</div>
+<span class="font-label-micro text-label-micro text-primary-container shrink-0 self-start md:self-center uppercase">[ PRESENT CHAPTER ]</span>
+</div>
+<!-- Milestone 2: 2025 -->
+<div class="bg-surface-container p-module-padding-md rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm hover:bg-surface-container-high transition-colors duration-300">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3">
+<span class="font-label-code text-label-code bg-surface-container-highest text-on-surface px-2.5 py-0.5 rounded font-bold">2025</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase">Android Application Developer</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">
+              Focused on developing Android applications using Java, XML, Android Studio, REST APIs, Node.js, Retrofit, local databases, GPS, notifications, and modern UI/UX. Built projects including TrackWay, NEXA AI, and NEXA AIR.
+            </p>
+</div>
+<span class="font-label-micro text-label-micro text-outline shrink-0 self-start md:self-center uppercase">[ CORE SPECIALIZATION ]</span>
+</div>
+<!-- Milestone 3: 2024 -->
+<div class="bg-surface-container p-module-padding-md rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm hover:bg-surface-container-high transition-colors duration-300">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3">
+<span class="font-label-code text-label-code bg-surface-container-highest text-on-surface px-2.5 py-0.5 rounded font-bold">2024</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase">Computer Science Student &amp; Software Developer</span>
+</div>
+<p class="font-body-md text-body-md text-secondary mt-1">
+              Strengthened foundations in programming, object-oriented development, problem solving, algorithms, and software engineering while exploring Java, C++, Python, Android development, and application architecture.
+            </p>
+</div>
+<span class="font-label-micro text-label-micro text-outline shrink-0 self-start md:self-center uppercase">[ FOUNDATION ]</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 9: INTERACTIVE TERMINAL / HUD & REPO COMMITS -->
+<section class="relative py-24 px-grid-margin-mobile md:px-grid-margin-desktop" id="terminal-section">
+<div class="max-w-4xl mx-auto flex flex-col gap-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="font-label-code text-label-code text-primary-container uppercase tracking-widest">[ DEVELOPER CONSOLE ]</span>
+<h2 class="font-headline-md text-headline-md text-on-surface uppercase tracking-tight mt-1">
+<span class="scroll-reveal-text">Interactive CLI Terminal</span>
+</h2>
+</div>
+<p class="font-label-micro text-label-micro text-on-surface-variant">
+          TYPE COMMANDS LIKE 'help', 'projects', 'clear', OR 'contact'
+        </p>
+</div>
+<!-- Real-Looking Developer Terminal -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl">
+<!-- Terminal Title Bar -->
+<div class="bg-surface-container px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<span class="font-label-code text-label-code text-on-surface-variant ml-2 font-mono">bash • asad@macbook-pro: ~/workspace</span>
+</div>
+<span class="font-label-micro text-label-micro text-outline">UTF-8</span>
+</div>
+<!-- Terminal Output Body -->
+<div class="p-4 md:p-6 font-label-code text-label-code font-mono text-on-surface flex flex-col gap-2 min-h-[260px] max-h-[400px] overflow-y-auto" id="terminal-screen">
+<div class="text-on-surface-variant">
+            Welcome to Asad Ali Khan CLI [v2.4.1-live]<br/>
+            Type <span class="text-primary-container font-semibold">'help'</span> to view available system commands.
+          </div>
+<div class="text-primary-container">$ git status</div>
+<div class="text-secondary">On branch main • Working tree clean. All production micro-services operational.</div>
+</div>
+<!-- Terminal Input Line -->
+<form class="bg-surface-container-low px-4 py-3 flex items-center gap-2" id="terminal-form">
+<span class="font-label-code text-label-code text-primary-container font-bold">&gt;_</span>
+<input autocomplete="off" class="w-full bg-transparent font-label-code text-label-code text-on-surface focus:outline-none placeholder:text-surface-container-highest" id="terminal-input" placeholder="type a command..." type="text"/>
+<button class="px-3 py-1 bg-surface-container-highest hover:bg-surface-container-high rounded text-on-surface font-label-micro text-label-micro uppercase" type="submit">ENTER</button>
+</form>
+</div>
+<!-- Simulated GitHub Heatmap Matrix -->
+<div class="bg-surface-container p-5 rounded-xl shadow-sm flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="font-label-micro text-label-micro text-on-surface uppercase tracking-wider font-semibold">ENGINEERING COMMIT CADENCE</span>
+<span class="font-label-micro text-label-micro text-primary-container">145+ COMMITS IN LAST YEAR</span>
+</div>
+<div class="grid grid-cols-12 md:grid-cols-24 gap-1.5 overflow-x-auto py-1">
+<!-- Week 1 -->
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/30"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/60"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/40"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/80"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<!-- Week 2 -->
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/20"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/60"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/90"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/40"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<!-- Week 3 -->
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/70"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/50"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/30"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/90"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<!-- Week 4 -->
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/60"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/40"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/80"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/20"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/60"></div>
+<!-- Week 5 -->
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/90"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/40"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/70"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/50"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<!-- Week 6 -->
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/30"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/90"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/60"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-surface-container-high"></div>
+<div class="w-3.5 h-3.5 rounded-xs bg-primary-container/40"></div>
+</div>
+<!-- Legend -->
+<div class="flex items-center justify-end gap-2 pt-1">
+<span class="font-label-micro text-label-micro text-on-surface-variant text-[10px]">Less</span>
+<div class="w-3 h-3 rounded-xs bg-surface-container-high"></div>
+<div class="w-3 h-3 rounded-xs bg-primary-container/30"></div>
+<div class="w-3 h-3 rounded-xs bg-primary-container/60"></div>
+<div class="w-3 h-3 rounded-xs bg-primary-container/90"></div>
+<div class="w-3 h-3 rounded-xs bg-primary-container"></div>
+<span class="font-label-micro text-label-micro text-on-surface-variant text-[10px]">More</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 10: METRICS & IMPACT COUNTERS -->
+<section class="relative py-20 px-grid-margin-mobile md:px-grid-margin-desktop bg-surface-container-low">
+<div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6" id="metrics-stats-grid">
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-1 hover:bg-surface-container-high transition-colors duration-300">
+<span class="font-display text-display text-primary-container leading-none">05</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase mt-2">Projects Built</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant">Android · Web · Games</span>
+</div>
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-1 hover:bg-surface-container-high transition-colors duration-300">
+<span class="font-display text-display text-on-surface leading-none">04</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase mt-2">Tech Domains</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant">Mobile · AI · Web · 3D</span>
+</div>
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-1 hover:bg-surface-container-high transition-colors duration-300">
+<span class="font-display text-display text-primary-container leading-none">12</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase mt-2">Tech Skills</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant">Languages · Frameworks · Tools</span>
+</div>
+<div class="bg-surface-container p-module-padding-md rounded-xl shadow-sm flex flex-col gap-1 hover:bg-surface-container-high transition-colors duration-300">
+<span class="font-display text-display text-on-surface leading-none">3+</span>
+<span class="font-title text-title text-on-surface font-semibold uppercase mt-2">Years Experience</span>
+<span class="font-label-micro text-label-micro text-on-surface-variant">Building &amp; Learning</span>
+</div>
+</div>
+</section>
+<!-- SECTION 11: DRAMATIC CONTACT FINALE -->
+<section class="relative py-28 md:py-36 px-grid-margin-mobile md:px-grid-margin-desktop" id="contact">
+<div class="max-w-5xl mx-auto flex flex-col items-center text-center gap-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span class="font-label-code text-label-code text-primary-container uppercase tracking-widest">OPEN FOR OPPORTUNITIES</span>
+</div>
+<h2 class="font-display text-display text-white tracking-tighter uppercase leading-none max-w-4xl">
+<span class="scroll-reveal-text">LET'S BUILD SOMETHING <span class="text-primary-container">EXTRAORDINARY.</span></span>
+</h2>
+<p class="font-body-lg text-body-lg text-secondary max-w-xl">
+        Have an idea for a mobile app, AI-powered system, interactive web experience, or 3D/game project? Let's collaborate and bring it to life.
+      </p>
+<!-- Direct Contact Hub Card -->
+<div class="w-full max-w-xl bg-surface-container p-module-padding-md md:p-module-padding-lg rounded-2xl shadow-2xl flex flex-col gap-6 mt-4">
+<div class="flex items-center justify-between bg-surface-container-lowest p-3.5 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">mail</span>
+<span class="font-label-code text-label-code text-on-surface select-all" id="contact-email">asadkhandurrani9022@gmail.com</span>
+</div>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high rounded text-on-surface font-label-micro text-label-micro uppercase transition-all flex items-center gap-1" id="copy-email-btn" onclick="copyContactEmail()">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span class="">COPY</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<a class="p-3 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-on-surface font-label-code text-label-code uppercase transition-all flex items-center justify-center gap-2" href="https://www.linkedin.com/in/asad-ali-khan-developer/" target="_blank">
+<span class="">LINKEDIN</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</a>
+<a class="p-3 bg-surface-container-low hover:bg-surface-container-high rounded-lg text-on-surface font-label-code text-label-code uppercase transition-all flex items-center justify-center gap-2" href="https://github.com/Asad-KhanDev" target="_blank">
+<span class="">GITHUB</span>
+<span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+</a>
+</div>
+<a class="w-full py-4 bg-primary-container text-on-primary-fixed font-label-code text-label-code font-bold uppercase rounded-xl hover:bg-primary-fixed hover:shadow-[0_0_24px_rgba(56,242,127,0.4)] transition-all flex items-center justify-center gap-2" href="mailto:asadkhandurrani9022@gmail.com">
+<span class="">START A CONVERSATION →</span>
+</a>
+</div>
+</div>
+</section>
+<!-- MODAL FOR PROJECT DEEP DIVE (HIDDEN BY DEFAULT) -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl hidden items-center justify-center p-4" id="project-modal">
+<div class="bg-surface-container max-w-lg w-full p-module-padding-lg rounded-2xl shadow-2xl flex flex-col gap-4 relative">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface" onclick="closeProjectModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+<span class="font-label-code text-label-code text-primary-container" id="modal-project-sub">[ TELEMETRY AUDIT ]</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface uppercase" id="modal-project-title">PROJECT SPECS</h3>
+<p class="font-body-md text-body-md text-secondary" id="modal-project-desc">
+        Comprehensive test coverage executed with MockK and Robolectric. 0 memory leaks observed under Android Profiler allocations.
+      </p>
+<div class="p-3 bg-surface-container-low rounded-lg font-label-code text-label-code text-on-surface-variant flex justify-between">
+<span class="">FRAME BUDGET: 16.6ms</span>
+<span class="text-primary-container">PASS: 100%</span>
+</div>
+<button class="mt-2 py-2.5 bg-surface-container-high text-on-surface font-label-code text-label-code uppercase rounded-lg hover:bg-surface-container-highest" onclick="closeProjectModal()">
+        CLOSE VIEWER
+      </button>
+</div>
+</div>
+</div>
+<!-- CLIENT-SIDE MICRO-INTERACTIONS & SCROLL-TRIGGERED SCRIPT -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. Glowing Neon Mint Scroll-Progress Bar
+    const progressBar = document.getElementById('scroll-progress-bar');
+    const updateScrollProgress = () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? Math.min(Math.max(scrollY / docHeight, 0), 1) : 0;
+      if (progressBar) {
+        progressBar.style.transform = `scaleX(${progress})`;
+      }
+    };
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    // 2. IntersectionObserver for Text Reveals (Left-to-Right reveal)
+    const textRevealElements = document.querySelectorAll('.scroll-reveal-text');
+    if (isReducedMotion) {
+      textRevealElements.forEach(el => el.classList.add('revealed'));
+    } else if ('IntersectionObserver' in window) {
+      const textObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+
+      textRevealElements.forEach(el => textObserver.observe(el));
+    } else {
+      textRevealElements.forEach(el => el.classList.add('revealed'));
+    }
+
+    // 3. Precision Engineering Lifecycle (Staggered Entrance 0-150ms intervals)
+    const lifecycleCards = document.querySelectorAll('.lifecycle-card-anim');
+    if (isReducedMotion) {
+      lifecycleCards.forEach(c => c.classList.add('revealed'));
+    } else if ('IntersectionObserver' in window) {
+      const lifecycleSection = document.getElementById('lifecycle-grid') || document.getElementById('lifecycle-section');
+      if (lifecycleSection) {
+        const lifecycleObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              lifecycleCards.forEach(c => c.classList.add('revealed'));
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        lifecycleObserver.observe(lifecycleSection);
+      }
+    } else {
+      lifecycleCards.forEach(c => c.classList.add('revealed'));
+    }
+
+    // 4. Capability Matrix Grid Reveal (Staggered Grid-Cascade Reveal)
+    const skillCardsCascade = document.querySelectorAll('.skill-card-cascade');
+    if (isReducedMotion) {
+      skillCardsCascade.forEach(card => card.classList.add('revealed'));
+    } else if ('IntersectionObserver' in window) {
+      const skillsGrid = document.getElementById('skills-grid');
+      if (skillsGrid) {
+        // Set staggered transition delays for aesthetic cascading
+        skillCardsCascade.forEach((card, idx) => {
+          card.style.transitionDelay = `${(idx % 6) * 60 + Math.floor(idx / 6) * 80}ms`;
+        });
+        const skillsObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              skillCardsCascade.forEach(card => card.classList.add('revealed'));
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        skillsObserver.observe(skillsGrid);
+      }
+    } else {
+      skillCardsCascade.forEach(card => card.classList.add('revealed'));
+    }
+
+    // 5. Project Cards: 3D Hover-Tilt / Parallax Follow
+    if (!isReducedMotion) {
+      const tiltCards = document.querySelectorAll('.tilt-card');
+      tiltCards.forEach(card => {
+        let isHovered = false;
+
+        card.addEventListener('mouseenter', () => {
+          isHovered = true;
+        });
+
+        card.addEventListener('mousemove', (e) => {
+          if (!isHovered) return;
+          const rect = card.getBoundingClientRect();
+          const cardX = e.clientX - rect.left;
+          const cardY = e.clientY - rect.top;
+          
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          // Max 6deg rotateX and rotateY
+          const rotateX = ((centerY - cardY) / centerY) * 6;
+          const rotateY = ((cardX - centerX) / centerX) * 6;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translate3d(0, -2px, 0)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          isHovered = false;
+          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)';
+        });
+      });
+    }
+
+    // 6. Entrance Sequence Counter
+    let count = 0;
+    const num = document.getElementById('loader-num');
+    const bar = document.getElementById('loader-bar');
+    const loader = document.getElementById('loader');
+
+    const interval = setInterval(() => {
+      count += Math.floor(Math.random() * 8) + 3;
+      if (count > 100) count = 100;
+      if (num) num.innerText = (count < 10 ? '00' : count < 100 ? '0' : '') + count + '%';
+      if (bar) bar.style.width = count + '%';
+
+      if (count === 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          if (loader) {
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 700);
+          }
+        }, 300);
+      }
+    }, 45);
+
+    // 7. Mouse Tracking & Coordinates Telemetry
+    window.addEventListener('mousemove', (e) => {
+      const coordEl = document.getElementById('telemetry-coords');
+      if (coordEl) {
+        coordEl.innerText = `X: ${e.clientX} | Y: ${e.clientY}`;
+      }
+    });
+
+    // 8. Skills Telemetry Dynamic Switcher
+    const skillCards = document.querySelectorAll('.skill-card');
+    const titleEl = document.getElementById('telemetry-node-title');
+    const stackEl = document.getElementById('telemetry-node-stack');
+    const pctEl = document.getElementById('telemetry-node-pct');
+    const expEl = document.getElementById('telemetry-node-exp');
+
+    skillCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const name = card.getAttribute('data-name');
+        const stack = card.getAttribute('data-stack');
+        const level = card.getAttribute('data-level');
+        const years = card.getAttribute('data-years');
+
+        if (titleEl) titleEl.innerText = name;
+        if (stackEl) stackEl.innerText = stack;
+        if (pctEl) pctEl.innerText = level;
+        if (expEl) expEl.innerText = years;
+      });
+    });
+
+    // TRACKWAY LIVE GPS NAVIGATION & TELEMETRY ENGINE
+    const trackwayContainer = document.getElementById('trackway-map-container');
+    const gpsBeacon = document.getElementById('gps-beacon');
+    const liveTrailPath = document.getElementById('live-trail-path');
+    const beaconHeading = document.getElementById('beacon-heading');
+    const telemetrySpeedEl = document.getElementById('telemetry-speed-val');
+    const audioToggleBtn = document.getElementById('sonar-audio-toggle');
+    const audioIcon = document.getElementById('sonar-audio-icon');
+
+    // Real-world Road Arteries Waypoints across Islamabad image https://lh3.googleusercontent.com/aida-public/AB6AXuAOrUPz2XyC3zKWCLUBcNqApNtWlrK3JqCtftBbT0L2RsJIYI3TfD0uTbdWnUldByuN3Ub3hPhhRqgS4MU_hmurrbDZ1ShiXXM5H1HX2bsMYxkgrgEV74FW8Kq3G8rL4TdZ-W-AqUAd3cPpJAUF_N_UkQxs_nwh_vi9XFw3XreC3jMaSLTtkYYpYVqk5Xj4M0caqVtWdaLeYccvlK91HRa72emHaILjROKfery_J9gk2PuEtUiHKxcPSVDFBM2nL3tLmV8 (Shaheen Chowk, Margalla Rd, University Rd towards Air University)
+    // Coords relative to 1000x600 SVG viewBox
+    const routeWaypoints = [
+      { x: 960, y: 170, speed: 66.8, name: "Margalla Rd Eastbound" },
+      { x: 860, y: 232, speed: 67.4, name: "Margalla Rd" },
+      { x: 775, y: 284, speed: 65.1, name: "Margalla Rd Approach" },
+      { x: 675, y: 345, speed: 61.2, name: "Shaheen Chowk Sector" },
+      { x: 648, y: 360, speed: 58.5, name: "Shaheen Chowk Roundabout" },
+      { x: 620, y: 378, speed: 59.4, name: "University Rd Entry" },
+      { x: 550, y: 410, speed: 63.5, name: "University Rd Straight" },
+      { x: 470, y: 445, speed: 64.9, name: "Air University Administration Approach" },
+      { x: 380, y: 485, speed: 62.0, name: "University Rd South" },
+      { x: 430, y: 390, speed: 58.6, name: "Air University Mini Block Turn" },
+      { x: 505, y: 280, speed: 60.5, name: "Campus Access Conduit" },
+      { x: 575, y: 240, speed: 62.3, name: "North Perimeter" },
+      { x: 648, y: 360, speed: 59.0, name: "Shaheen Chowk Junction" },
+      { x: 780, y: 280, speed: 66.2, name: "Margalla Return Corridor" },
+      { x: 960, y: 170, speed: 68.4, name: "Margalla Straightway" }
+    ];
+
+    // Compute cumulative segment distances
+    let totalRouteDist = 0;
+    const segmentDists = [];
+    for (let i = 0; i < routeWaypoints.length - 1; i++) {
+      const dx = routeWaypoints[i+1].x - routeWaypoints[i].x;
+      const dy = routeWaypoints[i+1].y - routeWaypoints[i].y;
+      const d = Math.hypot(dx, dy);
+      segmentDists.push(d);
+      totalRouteDist += d;
+    }
+
+    // Web Audio API Synthesizer Sonar Ping
+    let audioCtx = null;
+    let isSonarAudioMuted = true;
+    let lastAudioPingTime = 0;
+
+    const initAudioContext = () => {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) audioCtx = new AudioContextClass();
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    };
+
+    const triggerSonarPing = () => {
+      if (isSonarAudioMuted || !audioCtx) return;
+      try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        // 880Hz / 1200Hz harmonic ping blip
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.08, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.35);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.36);
+      } catch (err) {
+        // Audio error silent fallback
+      }
+    };
+
+    if (audioToggleBtn && audioIcon) {
+      audioToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        initAudioContext();
+        isSonarAudioMuted = !isSonarAudioMuted;
+        if (isSonarAudioMuted) {
+          audioIcon.innerText = 'volume_off';
+          audioIcon.classList.remove('text-primary-container');
+          audioToggleBtn.classList.remove('border-primary-container');
+        } else {
+          audioIcon.innerText = 'volume_up';
+          audioIcon.classList.add('text-primary-container');
+          audioToggleBtn.classList.add('border-primary-container');
+          triggerSonarPing();
+        }
+      });
+    }
+
+    // Position Interpolation along Waypoints
+    const getRoutePosition = (progress) => {
+      const targetDist = (progress % 1) * totalRouteDist;
+      let accum = 0;
+      for (let i = 0; i < segmentDists.length; i++) {
+        const nextAccum = accum + segmentDists[i];
+        if (targetDist <= nextAccum || i === segmentDists.length - 1) {
+          const segT = segmentDists[i] > 0 ? (targetDist - accum) / segmentDists[i] : 0;
+          const p1 = routeWaypoints[i];
+          const p2 = routeWaypoints[i+1];
+          const curX = p1.x + (p2.x - p1.x) * segT;
+          const curY = p1.y + (p2.y - p1.y) * segT;
+          const curSpeed = p1.speed + (p2.speed - p1.speed) * segT;
+          const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x) * (180 / Math.PI) + 90;
+          return { x: curX, y: curY, speed: curSpeed, angle: angle, segmentIndex: i, segT: segT };
+        }
+        accum = nextAccum;
+      }
+      return { x: routeWaypoints[0].x, y: routeWaypoints[0].y, speed: routeWaypoints[0].speed, angle: 0, segmentIndex: 0, segT: 0 };
+    };
+
+    // Breadcrumb Trail Points Buffer
+    const trailBuffer = [];
+    const maxTrailLength = 40;
+    const loopDurationMs = 21000; // Smooth 21s loop
+    let routeAnimStartTime = null;
+    let isTrackwayInView = true;
+    let animationFrameId = null;
+
+    // IntersectionObserver to pause loop when Trackway card is off-screen
+    if ('IntersectionObserver' in window && trackwayContainer) {
+      const trackwayObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isTrackwayInView = entry.isIntersecting;
+          if (isTrackwayInView && !animationFrameId) {
+            animationFrameId = requestAnimationFrame(renderTrackwayLoop);
+          }
+        });
+      }, { threshold: 0.1 });
+      trackwayObserver.observe(trackwayContainer);
+    }
+
+    const renderTrackwayLoop = (timestamp) => {
+      if (!isTrackwayInView) {
+        animationFrameId = null;
+        return;
+      }
+
+      if (!routeAnimStartTime) routeAnimStartTime = timestamp;
+      const elapsed = timestamp - routeAnimStartTime;
+      const loopProgress = (elapsed % loopDurationMs) / loopDurationMs;
+
+      // Sonar Sound Trigger (~every 1800ms matching the radar ring animation)
+      if (timestamp - lastAudioPingTime >= 1800) {
+        lastAudioPingTime = timestamp;
+        triggerSonarPing();
+      }
+
+      const state = getRoutePosition(loopProgress);
+
+      // 1. Dynamic Beacon Position & Orientation
+      if (gpsBeacon && trackwayContainer) {
+        const pctX = (state.x / 1000) * 100;
+        const pctY = (state.y / 600) * 100;
+        gpsBeacon.style.left = `${pctX.toFixed(2)}%`;
+        gpsBeacon.style.top = `${pctY.toFixed(2)}%`;
+
+        if (beaconHeading) {
+          beaconHeading.style.transform = `translateX(-50%) rotate(${state.angle.toFixed(1)}deg)`;
+        }
+      }
+
+      // 2. Trailing Breadcrumb Trail Path Calculation
+      trailBuffer.push({ x: state.x, y: state.y });
+      if (trailBuffer.length > maxTrailLength) {
+        trailBuffer.shift();
+      }
+
+      if (liveTrailPath && trailBuffer.length > 1) {
+        let dStr = `M ${trailBuffer[0].x.toFixed(1)} ${trailBuffer[0].y.toFixed(1)}`;
+        for (let i = 1; i < trailBuffer.length; i++) {
+          dStr += ` L ${trailBuffer[i].x.toFixed(1)} ${trailBuffer[i].y.toFixed(1)}`;
+        }
+        liveTrailPath.setAttribute('d', dStr);
+      }
+
+      // 3. Telemetry Speed Fluctuation Sync (58.4 km/h to 68.7 km/h)
+      if (telemetrySpeedEl) {
+        // Micro jitter calculation for authenticity
+        const jitter = Math.sin(timestamp / 320) * 0.45;
+        const finalSpeed = Math.min(Math.max(state.speed + jitter, 58.4), 68.7);
+        telemetrySpeedEl.innerText = `${finalSpeed.toFixed(1)} km/h`;
+      }
+
+      animationFrameId = requestAnimationFrame(renderTrackwayLoop);
+    };
+
+    // Kick off animation loop
+    animationFrameId = requestAnimationFrame(renderTrackwayLoop);
+
+    // 9. Interactive Pong Canvas Engine
+    const canvas = document.getElementById('pong-canvas');
+    if (canvas && canvas.getContext) {
+      const ctx = canvas.getContext('2d');
+      let ballX = 240, ballY = 88;
+      let ballSpeedX = 3, ballSpeedY = 2;
+      let playerPaddleY = 60, aiPaddleY = 60;
+      const paddleHeight = 44, paddleWidth = 6;
+
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const rootY = e.clientY - rect.top;
+        playerPaddleY = rootY - (paddleHeight / 2);
+      });
+
+      function gameLoop() {
+        ctx.fillStyle = '#0a0f13';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.strokeStyle = '#1c2024';
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ballX += ballSpeedX;
+        ballY += ballSpeedY;
+
+        if (ballY <= 4 || ballY >= canvas.height - 4) {
+          ballSpeedY = -ballSpeedY;
+        }
+
+        if (aiPaddleY + (paddleHeight / 2) < ballY - 10) {
+          aiPaddleY += 2.2;
+        } else if (aiPaddleY + (paddleHeight / 2) > ballY + 10) {
+          aiPaddleY -= 2.2;
+        }
+
+        if (ballX <= 20 && ballX >= 12 && ballY >= playerPaddleY && ballY <= playerPaddleY + paddleHeight) {
+          ballSpeedX = Math.abs(ballSpeedX);
+        }
+
+        if (ballX >= canvas.width - 20 && ballX <= canvas.width - 12 && ballY >= aiPaddleY && ballY <= aiPaddleY + paddleHeight) {
+          ballSpeedX = -Math.abs(ballSpeedX);
+        }
+
+        if (ballX < 0 || ballX > canvas.width) {
+          ballX = canvas.width / 2;
+          ballY = canvas.height / 2;
+          ballSpeedX = -ballSpeedX;
+        }
+
+        ctx.fillStyle = '#38f27f';
+        ctx.fillRect(14, playerPaddleY, paddleWidth, paddleHeight);
+
+        ctx.fillStyle = '#ced5de';
+        ctx.fillRect(canvas.width - 20, aiPaddleY, paddleWidth, paddleHeight);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        requestAnimationFrame(gameLoop);
+      }
+      requestAnimationFrame(gameLoop);
+    }
+
+// 10. Interactive CLI Terminal Form
+const termForm = document.getElementById('terminal-form');
+const termInput = document.getElementById('terminal-input');
+const termScreen = document.getElementById('terminal-screen');
+
+if (termForm && termInput && termScreen) {
+  termForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const cmd = termInput.value.trim().toLowerCase();
+    if (!cmd) return;
+
+    const cmdRow = document.createElement('div');
+    cmdRow.className = 'text-primary-container';
+    cmdRow.innerText = `$ ${cmd}`;
+    termScreen.appendChild(cmdRow);
+
+    const respRow = document.createElement('div');
+    respRow.className = 'text-secondary';
+
+    switch (cmd) {
+      case 'help':
+        respRow.innerHTML = "Commands: <span class='text-on-surface'>about</span>, <span class='text-on-surface'>skills</span>, <span class='text-on-surface'>projects</span>, <span class='text-on-surface'>contact</span>, <span class='text-on-surface'>clear</span>";
+        break;
+      case 'about':
+        respRow.innerText = "Asad Ali Khan: Computer Science Student & Software Developer focused on Android development, AI, backend systems, web, and 3D applications.";
+        break;
+      case 'skills':
+        respRow.innerText = "Core: Android Development (Java, XML, SDK), App Architecture (MVVM, Room, Retrofit), Backend (Node.js, Express, REST APIs), AI & Computer Vision (Python, CameraX), Web (HTML, CSS, JavaScript, GSAP), 3D & Game Dev (Unreal, Godot).";
+        break;
+      case 'projects':
+        respRow.innerText = "1. Trackway (Fleet GPS Tracking) | 2. Nexa AI (AI Chatbot) | 3. Nexa Air (Gesture Control) | 4. Build Fit (Fitness App) | 5. Ping Pong (2D Arcade Game)";
+        break;
+      case 'contact':
+        respRow.innerText = "Direct Email: asadkhandurrani9022@gmail.com | Location: Pakistan | GitHub: https://github.com/Asad-KhanDev";
+        break;
+      case 'clear':
+        termScreen.innerHTML = '';
+        termInput.value = '';
+        return;
+      default:
+        respRow.innerText = `Command not recognized: '${cmd}'. Type 'help' for command manual.`;
+    }
+
+    termScreen.appendChild(respRow);
+    termInput.value = '';
+    termScreen.scrollTop = termScreen.scrollHeight;
+  });
+}
+});
+  // Copy Email Handler
+  function copyContactEmail() {
+    navigator.clipboard.writeText('asadkhandurrani9022@gmail.com');
+    const btn = document.getElementById('copy-email-btn');
+    if (btn) {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[14px]">check</span> COPIED!`;
+      setTimeout(() => {
+        btn.innerHTML = `<span class="material-symbols-outlined text-[14px]">content_copy</span> COPY`;
+      }, 2000);
+    }
+  }
+
+  // Resume Download Mock
+  function downloadResumeMock() {
+    alert("Curriculum Vitae [PDF] telemetry package is ready. Transmitting file...");
+  }
+
+  // Project Modal Handlers
+  function triggerProjectModal(projectName) {
+    const modal = document.getElementById('project-modal');
+    const title = document.getElementById('modal-project-title');
+    if (title) title.innerText = projectName;
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
+
+  function closeProjectModal() {
+    const modal = document.getElementById('project-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+</script>
+<!-- GSAP CINEMA CONTROLLER - HERO ANIMATIONS -->
+<script id="gsap-cinema-controller">
+document.addEventListener('DOMContentLoaded', () => { 
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return; 
+  
+  gsap.registerPlugin(ScrollTrigger); 
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; 
+  if (isReducedMotion) return; 
+
+  /* 1. Hero Kinetic Entrance Orchestration */
+  const heroTimeline = gsap.timeline({ 
+    defaults: { ease: 'power3.out', duration: 1 } 
+  }); 
+  
+  heroTimeline
+    .fromTo('#hero-section h1', 
+      { y: 60, opacity: 0, clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)' }, 
+      { y: 0, opacity: 1, clipPath: 'polygon(0 0%, 100% 0%, 100% 100%, 0 100%)', stagger: 0.15, duration: 1.2 }, 
+      0.2
+    )
+    .fromTo('#hero-section p', 
+      { y: 24, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 0.9 }, 
+      0.6
+    )
+    .fromTo('#hero-section .relative.z-10.flex.flex-col.md\\:flex-row a', 
+      { y: 20, opacity: 0 }, 
+      { y: 0, opacity: 1, stagger: 0.12, duration: 0.8 }, 
+      0.8
+    );
+
+  /* 2. Bio Spec Portrait Smooth Parallax */
+  const bioPortrait = document.getElementById('bio-spec-portrait'); 
+  if (bioPortrait) { 
+    gsap.to(bioPortrait, { 
+      yPercent: 12, 
+      ease: 'none', 
+      scrollTrigger: { 
+        trigger: '#about', 
+        start: 'top bottom', 
+        end: 'bottom top', 
+        scrub: 1.2 
+      } 
+    }); 
+  } 
+
+  /* 3. Capability Matrix Grid Staggered Cascade */
+  const skillCards = document.querySelectorAll('.skill-card'); 
+  if (skillCards.length > 0) { 
+    gsap.fromTo(skillCards, 
+      { scale: 0.92, opacity: 0, y: 30 }, 
+      { scale: 1, opacity: 1, y: 0, duration: 0.65, ease: 'back.out(1.4)', stagger: { amount: 0.6, grid: 'auto', from: 'start' }, 
+      scrollTrigger: { trigger: '#skills-grid', start: 'top 82%', toggleActions: 'play none none none' } 
+    }); 
+  } 
+
+  /* 4. Pinned Project Cards 3D Tilt & Scrub Revealer */
+  const projectCards = document.querySelectorAll('.tilt-card-wrapper'); 
+  projectCards.forEach((wrapper, i) => { 
+    const card = wrapper.querySelector('.tilt-card'); 
+    if (card) { 
+      gsap.fromTo(card, 
+        { opacity: 0, y: 60, rotateX: 6 }, 
+        { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: 'power2.out', 
+        scrollTrigger: { trigger: wrapper, start: 'top 85%', toggleActions: 'play none none none' } 
+      }); 
+    } 
+  }); 
+
+  /* 5. Precision Engineering Lifecycle Sequential Ribbon */
+  const lifecycleItems = document.querySelectorAll('.lifecycle-card-anim'); 
+  if (lifecycleItems.length > 0) { 
+    gsap.fromTo(lifecycleItems, 
+      { x: -35, opacity: 0 }, 
+      { x: 0, opacity: 1, duration: 0.7, ease: 'power2.out', stagger: 0.12, 
+      scrollTrigger: { trigger: '#lifecycle-grid', start: 'top 80%', toggleActions: 'play none none none' } 
+    }); 
+  } 
+
+  /* 6. Blueprint Schematics Reel Subtle Velocity Drift */
+  const schematicsReel = document.getElementById('schematics-reel'); 
+  if (schematicsReel) { 
+    gsap.fromTo(schematicsReel.children, 
+      { opacity: 0, x: 40 }, 
+      { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', stagger: 0.14, 
+      scrollTrigger: { trigger: schematicsReel, start: 'top 85%', toggleActions: 'play none none none' } 
+    }); 
+  } 
+
+  /* 7. Micro Magnetic Resonance on Primary Buttons */
+  const magneticButtons = document.querySelectorAll('a[href="#contact"], a[href="#projects"], #sonar-audio-toggle, button[onclick^="triggerProjectModal"]'); 
+  magneticButtons.forEach(btn => { 
+    btn.addEventListener('mousemove', (e) => { 
+      const rect = btn.getBoundingClientRect(); 
+      const x = e.clientX - (rect.left + rect.width / 2); 
+      const y = e.clientY - (rect.top + rect.height / 2); 
+      gsap.to(btn, { x: x * 0.22, y: y * 0.22, duration: 0.3, ease: 'power2.out' }); 
+    }); 
+    btn.addEventListener('mouseleave', () => { 
+      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' }); 
+    }); 
+  }); 
+});
+</script>
+</main><footer class="w-full bg-surface-container-lowest py-module-padding-lg relative z-20"><div class="max-w-[1440px] mx-auto px-grid-margin-mobile md:px-grid-margin-tablet lg:px-grid-margin-desktop flex flex-col md:flex-row items-center justify-between gap-6"><div class="flex flex-col items-center md:items-start gap-1"><span class="font-label-code text-label-code uppercase text-on-surface">Asad Ali Khan — Portfolio</span><span class="font-label-micro text-label-micro text-on-surface-variant">© 2026 Crafted with mathematical precision. All rights reserved.</span></div><div class="flex items-center gap-6"><a class="font-label-code text-label-code uppercase text-on-surface-variant hover:text-primary-container transition-colors" data-path="work" href="https://github.com" target="_blank">GitHub</a><a class="font-label-code text-label-code uppercase text-on-surface-variant hover:text-primary-container transition-colors" data-path="experience" href="https://linkedin.com" target="_blank">LinkedIn</a><a class="font-label-code text-label-code uppercase text-on-surface-variant hover:text-primary-container transition-colors" data-path="contact" href="mailto:asadkhandurrani9022@gmail.com">Email</a></div><a class="flex items-center gap-2 font-label-code text-label-code uppercase text-on-surface-variant hover:text-on-surface transition-colors bg-surface-container-low px-3 py-1.5 rounded-full shadow-[0_1px_8px_rgba(0,0,0,0.4)]" href="#top"><span class="">Back To Top</span><span class="material-symbols-outlined text-[16px]">north</span></a></div></footer>
+</body></html>
